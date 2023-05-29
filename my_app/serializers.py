@@ -19,8 +19,13 @@ class CustomUserSerializer(serializers.ModelSerializer):
         fields = "__all__"
     
     def validate(self, data):
-        user_id = data.get('id')
-        if UsersModel.objects.filter(id=user_id).exists():
+        user_id = data.get('telegram_id')
+        if UsersModel.objects.filter(telegram_id=user_id).exists():
             raise serializers.ValidationError("User with this id already exists")
         return data
     
+class UserPUTLangSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UsersModel
+        fields = ['lang']
+ 

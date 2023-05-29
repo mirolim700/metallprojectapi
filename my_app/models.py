@@ -10,17 +10,22 @@ def __str__(self):
     return self.title
 @property
 def picture(self):
-    return format_html('<img src= "{}" width="50" height="50" style="border_radius:50% " />'.format(self.image.url) )
+    if self.image:
+        return format_html('<img src= "{}" width="50" height="50" style="border_radius:50% " />'.format(self.image.url) )
 
 
 class InfoModel(models.Model):
     admin_telegram_username = models.CharField(max_length=60)
     admin_phone_number = models.TextField()
     bot_username = models.CharField(max_length=100,blank=True)
+    location = models.TextField()
+    def __str__(self):
+        return self.admin_telegram_username
+
 
 class UsersModel(models.Model):
-    username = models.TextField(null=True, blank=True)
+    username = models.TextField(null=True, blank=False)
     telegram_id = models.CharField(max_length=20)
-    lang = models.CharField(max_length=2,blank=True)
+    lang = models.CharField(max_length=2, default = 'uz')
     def __str__(self):
         return self.username
