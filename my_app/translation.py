@@ -1,11 +1,6 @@
-from .models import Product
+from .models import ProductsModel
 from modeltranslation.translator import register, TranslationOptions
-  
 
-@register(Product)
+@register(ProductsModel)
 class ProductTranslationOptions(TranslationOptions):
-    fields = ('title', )
-
-
-
-
+    fields = ('title',)
